@@ -13,7 +13,7 @@ use Rack::Session::Cookie, :secret => 'TH!S is A S3cRet Key Store F0R H)CK7y Man
 
 set :sinatra_authentication_view_path, Pathname(__FILE__).dirname.expand_path + "views/auth/"
 
-DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/hockey.db")  
+DataMapper::setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/hockey.db")  
   
 class Player  
   include DataMapper::Resource  
