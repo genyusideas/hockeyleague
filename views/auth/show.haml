@@ -1,0 +1,17 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th
+        Email
+      %th
+        Permission Level
+  %tbody
+    %tr
+      %td
+        - if @user.email
+          = @user.email
+        - elsif @user.fb_uid
+          <fb:name uid=#{@user.fb_uid} linked='false' />
+      %td
+        - if current_user.admin?
+          = @user.permission_level

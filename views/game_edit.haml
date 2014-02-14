@@ -1,0 +1,49 @@
+- if @game
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Home Team
+        %th Away Team
+        %th Location
+        %th Date
+        %th Time
+        %th
+        
+      %form.form-inline#edit{:action=>"/game/#{@game.id}", :method=>"post", :role => "form"}
+        %input{:type => "hidden", :name => "_method", :value => "put"} 
+        %tr
+          %td
+            %select.span2.row{:name => "home_team_id"}
+              %option{:value => "#{@game.home_team.id}"}#{@game.home_team.name}
+              - @teams.each do |home_team| 
+                %option{:value => "#{home_team.id}"}#{home_team.name} 
+          %td            
+            %select.span2.row{:name => "away_team_id"}
+              %option{:value => "#{@game.away_team.id}"}#{@game.away_team.name}
+              - @teams.each do |away_team| 
+                %option{:value => "#{away_team.id}"}#{away_team.name} 
+          %td      
+            %select.span2.row{:name => "location_id"}
+              %option{:value => "#{@game.location.id}"}#{@game.location.name}
+              - @locations.each do |location| 
+                %option{:value => "#{location.id}"}#{location.name}   
+          %td  
+            %input.span2.row{:type=>"time", :'data-format'=>"hh:mm", :step=>300, :value=>"21:00:00", :name => "game_time", :value => "#{@game.game_time}"}
+          %td  
+            %div.input-append#datepicker
+              %input.form-control.input-small{:type=>"text", :'data-format'=>"yyyy-MM-dd", :name => "game_date", :value => "#{@game.game_date}"}
+              %span.add-on
+                %i{:'data-date-icon'=>'icon-calendar'}        
+          %td  
+            %button.btn.btn-primary{:type=>"submit"}Update Game
+   
+  %p
+  %a.btn.btn-danger.btn-large{:href => "/game/#{@game.id}/delete"}Delete Game?
+- else  
+  %p Game not found. 
+  
+:javascript
+  $('#datepicker').datetimepicker({
+    pickTime: false,
+    language: 'pt-BR'
+  });  

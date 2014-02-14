@@ -1,0 +1,6 @@
+%p Are you sure you want to delete
+%blockquote
+  %p #{@player.first_name} #{@player.last_name}
+%form{:action=>"/delete/#{@player.id}", :method=>"POST"}
+  %button.btn.btn-primary{:type=>"submit", :name=>"ok"}OK
+  %button.btn{:type=>"submit", :name=>"cancel"}Cancel

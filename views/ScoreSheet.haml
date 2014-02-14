@@ -1,0 +1,75 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th
+        %center
+          #{@game.home_team.name} 
+          %h1 #{@home_goals.length} 
+          - if current_user.admin?  
+            = partial :goal,{:team_id => @game.home_team.id, :team_name => @home_players, :button_label => "Home Goal", :testname => "HomeGoal"} 
+            %br
+            %br
+            = partial :penality,{:team_id => @game.home_team.id, :team_name => @home_players, :button_label => "Home Penality", :testname => "HomePenality"} 
+      %th 
+        %center
+          #{@game.away_team.name} 
+          %h1 #{@away_goals.length} 
+          - if current_user.admin? 
+            = partial :goal,{:team_id => @game.away_team.id, :team_name => @away_players, :button_label => "Away Goal", :testname => "AwayGoal"}
+            %br
+            %br
+            = partial :penality,{:team_id => @game.away_team.id, :team_name => @away_players, :button_label => "Away Penality", :testname => "AwayPenality"}           
+      %tr
+        %td.active{:colspan => 2} 
+          %h4 Roster
+      %tr
+        %td
+          = partial :remove_from_roster, {:team_id => @game.home_team.id}                
+        %td
+          = partial :remove_from_roster, {:team_id => @game.away_team.id}          
+  %tbody
+    %tr
+      %td.active{:colspan => 3} 
+        %h4
+          Scoring Summary
+    - @goals.each do |goal|
+      %tr
+        %td{:colspan => 2} 
+          %b #{goal.team.name.upcase} -
+          %i Goal scored by
+          %b #{goal.goal_scorer.first_name} #{goal.goal_scorer.last_name}
+          - unless goal.assist1_player.nil?
+            %i assisted by 
+            %b #{goal.assist1_player.first_name} #{goal.assist1_player.last_name} 
+          - unless goal.assist2_player.nil?
+            %i and 
+            %b #{goal.assist2_player.first_name} #{goal.assist2_player.last_name}    
+        - if current_user.admin?     
+          %td
+            %form{:action=>"/goal/#{goal.id}/delete", :method=>"POST"}
+              %button.btn.btn-danger.btn-xs{:type=>"submit", :name=>"ok"}Delete   
+    %tr
+      %td.active{:colspan => 3} 
+        %h4
+          Penality Summary            
+    - @penalities.each do |p|
+      %tr
+        %td{:colspan => 2} 
+          %b #{p.team.name.upcase} - 
+          %b #{p.player.first_name} #{p.player.last_name}  
+          %i #{p.penality_length} minute #{p.penality_type} penality          
+        - if current_user.admin? 
+          %td
+            %form{:action=>"/penality/#{p.id}/delete", :method=>"POST"}
+              %button.btn.btn-danger.btn-xs{:type=>"submit", :name=>"ok"}Delete            
+- if current_user.admin?             
+  %table.table.table-hover 
+    %tbody           
+      %tr
+        %td
+          %h4 Add To Home Roster
+          = partial :add_to_roster, {:team_name => @home_players}
+        %td
+          %h4 Add To Away Roster
+          = partial :add_to_roster, {:team_name => @away_players}
+          

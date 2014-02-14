@@ -1,0 +1,4 @@
+%select.form-control{:name => point_type}
+  %option
+  - game_played_in(team_id, @game.id).roster_player.each do |p|
+    %option{:value => "#{p.id}"}#{p.first_name} #{p.last_name} 

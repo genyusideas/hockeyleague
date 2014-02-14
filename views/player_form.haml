@@ -1,0 +1,16 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th First Name
+      %th Last Name
+      %th Team
+      %th 
+  %tbody
+    - @players.each do |player|  
+      %tr
+        %td= player.first_name
+        %td= player.last_name
+        %td
+          %a{:href=>"team/#{player.team.id}"}#{player.team.name}
+        %td 
+          %a.btn.btn-primary.btn-mini{:href => "/player/#{player.id}"}Edit

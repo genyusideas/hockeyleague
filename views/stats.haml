@@ -1,0 +1,63 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th First Name
+      %th Last Name
+      %th Team
+      %th Goals
+      %th Assists
+      %th Points
+      %th PIMS
+  %tbody    
+  - @players.each do |p|
+    %tr
+      %td
+        = p.first_name
+      %td
+        = p.last_name
+      %td
+        = p.team.name  
+      %td
+        = player_stats(p.id)["Goals"]
+      %td
+        = player_stats(p.id)["Assists"]
+      %td
+        = player_stats(p.id)["Points"]
+      %td
+        = player_stats(p.id)["Penalities"]
+
+
+        
+%table.table.table-hover
+  %thead
+    %tr
+      %th Team
+      %th GP
+      %th GF
+      %th GA
+      %th wins
+      %th Loses
+      %th Ties
+  %tbody    
+  - @teams.each do |t|
+    %tr
+      %td
+        = t.name
+      %td  
+        = team_game_stats(t.id)["GP"] 
+      %td
+        = team_game_stats(t.id)["GF"] 
+      %td  
+        = team_game_stats(t.id)["GA"] 
+      %td
+        = team_game_stats(t.id)["Wins"]
+      %td
+        = team_game_stats(t.id)["Loses"]
+      %td
+        = team_game_stats(t.id)["Ties"]  
+        
+        
+        
+
+        
+  

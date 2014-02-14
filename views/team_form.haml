@@ -1,0 +1,17 @@
+%table.table.table-hover 
+  %thead
+    %tr
+      %th Team Name
+    %tr
+      %form.form-inline{:action=>"/team", :method=>"post", :role=>"form"}
+        %td 
+          %input.form-control{:type=>"text", :name=>"name", :placeholder=>"Team Name..."}
+        %td 
+          %button.btn.btn-primary{:type=>"submit"}Add Team 
+  %tbody
+    - @teams.each do |team|   
+      %tr
+        %td #{team.name}
+        %td 
+          %a.btn.btn-primary.btn-mini{:href=>"/team/#{team.id}"}Edit
+      

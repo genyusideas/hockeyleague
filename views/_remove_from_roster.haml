@@ -1,0 +1,31 @@
+%table.table.table-hover 
+  %thead
+    %tr
+      %th
+      %th
+        Name
+      %th
+        G
+      %th
+        A
+      %th
+        PIMS
+  - game_played_in(team_id, @game.id).each do |p|
+    %tr
+      %td
+        %form.form-horizontal{:action=>"/RemoveFromRoster", :method=>"post", :role=>"form"}
+          %input{:type=>"hidden", :name=>"roster_id", :value=>"#{p.id}"}
+          %td
+            = p.roster_player.first_name + " " + p.roster_player.last_name
+          %td  
+            = player_game_stats(p.roster_player.id, @game.id)["Goals"]
+          %td  
+            = player_game_stats(p.roster_player.id, @game.id)["Assists"]
+          %td  
+            = player_game_stats(p.roster_player.id, @game.id)["Penalities"]
+
+          - if current_user.admin? 
+            %td
+              %button.btn.btn-danger.btn-xs{:type=>"submit"}
+                %span.glyphicon.glyphicon-remove
+    

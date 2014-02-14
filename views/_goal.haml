@@ -1,0 +1,29 @@
+.button.btn.btn-primary.btn-lg{:'data-toggle'=>"modal", :'data-target'=>"##{testname}"}
+  #{button_label}
+.modal.fade{:tabindex=>"-1", :role=>"dialog", :'aria-labelledby'=>"myModalLabel", :id => "#{testname}",  :'aria-hidden'=>"true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{:type=>"button", :'data-dismiss'=>"modal", :'aria-hidden'=>"true"} 
+          &times;
+        %h4.modal-title#myModalLabel 
+          #{button_label}
+      .modal-body
+        %form.form-horizontal{:action=>"/goal", :method=>"post", :role=>"form"}
+          .form-group  
+            %label.col-sm-2.control-label Goal
+            .col-sm-8     
+              = partial :player_list_select,{:point_type => "goal_scorer", :team_id => team_id}    
+          .form-group 
+            %label.col-sm-2.control-label Assist
+            .col-sm-8
+              = partial :player_list_select,{:point_type => "assist1_player_id", :team_id => team_id}   
+          .form-group 
+            %label.col-sm-2.control-label Assist
+            .col-sm-8
+              = partial :player_list_select,{:point_type => "assist2_player_id", :team_id => team_id}      
+          %input{:type=>"hidden", :name=>"team_id", :value=>"#{team_name[0].team.id}"}
+          %input{:type=>"hidden", :name=>"game_id", :value=>"#{@game.id}"}            
+          %button.btn.btn-primary.btn-sm{:type=>"submit"} #{button_label}
+  
+  

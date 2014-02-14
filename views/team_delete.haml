@@ -1,0 +1,18 @@
+- if @team.players.empty?
+  %p Are you sure you want to delete:
+  %blockquote
+    %p
+      = @team.name
+  %form{:action=>"/team/#{@team.id}/delete", :method=>"POST"}
+    %button.btn.btn-primary{:type=>"submit", :name=>"ok"}OK
+    %button.btn{:type=>"submit", :name=>"cancel"}Cancel
+  
+- else
+  %blockquote
+    %p You need to delete the following players before you can delete #{@team.name}
+  - @team.players.each do |player| 
+    #{player.first_name} #{player.last_name}
+    %span
+      %a{:href=>"/player/#{player.id}"}[edit]
+      %br
+

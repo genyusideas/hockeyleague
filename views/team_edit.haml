@@ -1,0 +1,27 @@
+-if @team  
+  %form.form-inline#edit{:action=>"/team/#{@team.id}", :method=>"post", :role=>"form"}  
+    %input{:type=>"hidden", :name=>"_method", :value=>"put"}  
+    %input{:type=>"text", :name=>"name", :value=>"#{@team.name}"}
+    %input.btn.btn-primary{:type=>"submit", :value=>"Change Team Name"}
+ 
+  %h1 #{@team.name} Roster
+  %table.table.table-hover
+    - @team.players.each do |p| 
+      %tr
+        %td #{p.first_name}
+        %td #{p.last_name}
+        %td
+          %a.btn.btn-primary.btn-mini{:href=>"/player/#{p.id}"}Edit
+  	 
+  %section#add
+    %form.form-inline{:action=>"/player", :method=>"post", :role=>"form"}
+      %input{:type=>"text", :name=>"first_name", :placeholder=>"First Name..."}  
+      %input{:type=>"text", :name=>"last_name", :placeholder=>"Last Name..."}
+      %input{:type=>"hidden", :name=>"team_id", :value=>"#{@team.id}"}
+      %input.btn.btn-primary{:type=>"submit", :value=>"Add Player"}
+   
+  - if @team.players.empty?
+    %p
+      %a.btn.btn-danger.btn-large{:href=>"/team/#{@team.id}/delete"}Delete Team?
+- else  
+  %h1 Team not found.

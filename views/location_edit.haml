@@ -1,0 +1,9 @@
+- if @location
+  %form.form-inline#edit{:action=>"/location/#{@location.id}", :method=>"post"}
+    %input{:type=>"hidden", :name=>"_method", :value=>"put"}
+    %input{:type=>"text", :name=>"name", :value=>"#{@location.name}"}
+    %button.btn.btn-primary{:type=>"submit"}Update Location
+  %p
+    %a.btn.btn-danger.btn-large{:href=>"/location/#{@location.id}/delete"}Delete Location?
+- else  
+  %p Location not found.

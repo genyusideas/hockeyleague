@@ -1,0 +1,20 @@
+%section#add
+  
+ 
+%table.table.table-hover
+  %thead
+    %tr
+      %th Location
+      %th 
+    %tr
+    %form.form-inline#edit{:action=>"/location", :method=>"post"}
+      %td
+        %input{:type=>"text", :name=>"name", :placeholder=>"Location Name..."}
+      %td
+        %button.btn.btn-primary{:type=>"submit"}Add Location    
+  - @locations.each do |location|
+    %tr
+      %td
+        = location.name
+      %td
+        %a.btn.btn-mini.btn-primary{:href=>"/location/#{location.id}"}Edit

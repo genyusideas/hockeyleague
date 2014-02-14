@@ -1,0 +1,6 @@
+%p Are you sure you want to delete
+%blockquote
+  %p #{@game.home_team.name} against #{@game.away_team.name} on #{@game.game_date}
+%form{:action=>"/game/#{@game.id}/delete", :method=>"POST"}
+  %button.btn.btn-primary{:type=>"submit", :name=>"ok"}OK
+  %button.btn{:type=>"submit", :name=>"cancel"}Cancel

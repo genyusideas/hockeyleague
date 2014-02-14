@@ -1,0 +1,64 @@
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th Home Team
+      %th Away Team
+      %th Location
+      %th Time
+      %th Date
+      %th
+      
+    %form.form-inline#edit{:action=>"/game", :method=>"post"}
+      %tr
+        %td
+          %select.form-control{:name => "home_team_id"}
+            - @teams.each do |home_team| 
+              %option{:value => "#{home_team.id}"}#{home_team.name} 
+        %td            
+          %select.form-control{:name => "away_team_id"}
+            - @teams.each do |away_team| 
+              %option{:value => "#{away_team.id}"}#{away_team.name} 
+        %td      
+          %select.form-control{:name => "location_id"}
+            - @locations.each do |location| 
+              %option{:value => "#{location.id}"}#{location.name}   
+        %td  
+          %input.form-control{:type=>"time", :'data-format'=>"hh:mm", :step=>300, :value=>"21:00:00", :name => "game_time"}
+        %td
+          .col-sm-8        
+            %div.input-append#datepicker
+              %input.form-control.input-sm{:type=>"text", :'data-format'=>"yyyy-MM-dd", :name => "game_date"}
+              %span.add-on
+                %i{:'data-date-icon'=>'icon-calendar'}        
+        %td  
+          %button.btn.btn-primary{:type=>"submit"}Add Game
+      
+      
+  - @games.each do |game|
+    %tr
+      %td
+        %a{:href=>"/team/#{game.home_team.id}"}#{game.home_team.name}
+      %td
+        %a{:href=>"/team/#{game.away_team.id}"}#{game.away_team.name}
+      %td
+        = game.location.name     
+      %td
+        = game.game_date
+      %td
+        = game.game_time  
+      %td
+        %a.btn.btn-sm.btn-primary{:href=>"/game/#{game.id}"}Edit
+        %a.btn.btn-sm.btn-primary{:href=>"/ScoreSheet/#{game.id}"}ScoreSheet
+        
+
+  
+:javascript
+  $('#datepicker').datetimepicker({
+    pickTime: false,
+    language: 'pt-BR'
+  });  
+  
+
+
+    

@@ -1,0 +1,24 @@
+#sinatra_authentication
+  - if Rack.const_defined?('Flash') && flash[:notice]
+    #sinatra_authentication_flash= flash[:notice]
+  - if Rack.const_defined?('Flash') && flash[:error]
+    #sinatra_authentication_flash= flash[:error]
+  %h1.page_title Sign Up
+  %form.form-horizontal{:action => "/signup", :method => "post"}
+    .form-group
+      %label.col-sm-2.control-label{:for => "user_email"} Email
+      %input{ :id => "user_email", :name => "user[email]", :size => 30, :type => "text" , :value => params[:email]}
+    .form-group
+      %label.col-sm-2.control-label{:for => "user_password"} Password
+      %input{ :id => "user_password", :name => "user[password]", :size => 30, :type => "password" }
+    .form-group
+      %label.col-sm-2.control-label{:for => "user_password_confirmation"} Confirm Password
+      %input{ :id => "user_password_confirmation", :name => "user[password_confirmation]", :size => 30, :type => "password" }
+    %button.btn.btn-primary.btn-sm{:type => "submit" }Sign up
+    %a{:href => "/login", :class => 'sinatra_authentication_link'}
+      Login
+    - if Sinatra.const_defined?('FacebookObject')
+      .third_party_signup
+        %h3.section_title One click signup:
+        .login_link.facebook_login
+          = render_facebook_connect_link('Signup using facebook', :size => 'large')

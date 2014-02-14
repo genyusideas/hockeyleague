@@ -1,0 +1,9 @@
+- team_name.each do |player| 
+  - if @gamesplayed.first(:roster_player_id => player.id).nil?
+    %form.form-horizontal{:action=>"/AddToRoster", :method=>"post", :role=>"form"}
+      %input{:type=>"hidden", :name=>"team_id", :value=>"#{player.team.id}"}
+      %input{:type=>"hidden", :name=>"game_id", :value=>"#{@game.id}"} 
+      %input{:type=>"hidden", :name=>"player_id", :value=>"#{player.id}"}   
+      #{player.first_name} #{player.last_name}            
+      %button.btn.btn-success.btn-xs{:type=>"submit"}
+        %span.glyphicon.glyphicon-ok-sign

@@ -1,0 +1,8 @@
+%p Are you sure you want to delete:
+%blockquote
+  %p
+    = @location.name
+%form{:action=>"/location/#{@location.id}/delete", :method=>"POST"}
+  %button.btn.btn-primary{:type=>"submit", :name=>"ok"}OK
+  %button.btn{:type=>"submit", :name=>"cancel"}Cancel
+

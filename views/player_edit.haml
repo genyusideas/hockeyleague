@@ -1,0 +1,40 @@
+- if @player 
+  %form.form-inline#edit{:action => "/player/#{@player.id}", :method => "post", :role => "form"}
+    %input{:type => "hidden", :name => "_method", :value => "put"} 
+    %input{:type => "text", :name => "first_name", :value => "#{@player.first_name}"}
+    %input{:type => "text", :name => "last_name", :value => "#{@player.last_name}"}
+    %select{:name => "team_id"}
+      %option{:value => "#{@player.team.id}"}#{@player.team.name}
+      - @teams.each do |team| 
+        %option{:value => "#{team.id}"}#{team.name}   
+   
+    %button.btn.btn-primary{:type => "submit"}Update Player 
+    
+    %table.table.table-hover
+      %thead
+        %tr
+          %th First Name
+          %th Last Name
+          %th Team
+          %th Goals
+          %th Assists
+          %th Points
+      %tbody    
+        %tr
+          %td
+            = @player.first_name
+          %td
+            = @player.last_name
+          %td
+            = @player.team.name  
+          %td
+            = player_stats(@player.id)["Goals"]
+          %td
+            = player_stats(@player.id)["Assists"]
+          %td
+            = player_stats(@player.id)["Points"]    
+    
+  %p
+    %a.btn.btn-danger.btn-large{:href => "/player/#{@player.id}/delete"}Delete Player?
+- else  
+  %p Player not found.
