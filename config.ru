@@ -3,5 +3,5 @@ require 'bundler/setup'
 
 Bundler.require
 
-require './app'
+require './web'
 run Sinatra::Application
