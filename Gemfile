@@ -12,6 +12,7 @@ gem 'haml'
 gem 'sinatra-authentication'
 gem 'dm-core'
 gem 'dm-validations'
+gem 'dm-sqlite-adapter'
 
 
 group :production do
@@ -21,5 +22,4 @@ end
 
 group :development do
   gem 'sqlite3'
-  gem 'dm-sqlite-adapter'
 end
