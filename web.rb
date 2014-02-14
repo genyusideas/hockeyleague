@@ -6,7 +6,7 @@ require 'data_mapper'
 require 'dm-core'
 require 'dm-validations'
 require 'sinatra/flash'
-require 'Haml'
+require 'haml'
 require "sinatra-authentication"
 
 use Rack::Session::Cookie, :secret => 'TH!S is A S3cRet Key Store F0R H)CK7y Mana%er'
