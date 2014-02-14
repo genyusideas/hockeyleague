@@ -13,4 +13,11 @@ gem 'sinatra-authentication'
 gem 'dm-core'
 gem 'dm-validations'
 gem 'dm-sqlite-adapter'
-gem 'sqlite3', '1.3.6'
+
+group :production do
+  gem 'pg'
+end        
+
+group :development, :test do
+  gem 'sqlite3'
+end
