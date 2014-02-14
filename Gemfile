@@ -12,6 +12,7 @@ gem 'haml'
 gem 'sinatra-authentication'
 gem 'dm-core'
 gem 'dm-validations'
+gem 'haml'
 
 
 group :production do
