@@ -12,14 +12,12 @@ gem 'haml'
 gem 'sinatra-authentication'
 gem 'dm-core'
 gem 'dm-validations'
-gem 'dm-sqlite-adapter'
-
-
-group :production do
-  gem 'pg'
-  gem 'thin'
-end        
+gem 'dm-sqlite-adapter'   
 
 group :development do
   gem 'sqlite3'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
